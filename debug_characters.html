@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Check Characters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        button {
+            background: #b57edc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #9b5fc4;
+        }
+        h3 {
+            color: #b57edc;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug - Characters Data</h1>
+    
+    <div class="debug-box">
+        <h3>User Data:</h3>
+        <pre id="userData"></pre>
+    </div>
+
+    <div class="debug-box">
+        <h3>All Characters:</h3>
+        <pre id="allCharacters"></pre>
+    </div>
+
+    <div class="debug-box">
+        <h3>Current User's Characters:</h3>
+        <pre id="userCharacters"></pre>
+    </div>
+
+    <div class="debug-box">
+        <button onclick="refreshData()">🔄 Refresh Data</button>
+        <button onclick="createTestCharacter()">➕ Create Test Character</button>
+        <button onclick="clearAll()">🗑️ Clear All Data</button>
+        <button onclick="window.location.href='dashboard.html'">📊 Go to Dashboard</button>
+    </div>
+
+    <script>
+        function refreshData() {
+            // User Data
+            const userDataStr = localStorage.getItem('voiceBeyondUser');
+            const userData = userDataStr ? JSON.parse(userDataStr) : null;
+            document.getElementById('userData').textContent = JSON.stringify(userData, null, 2);
+
+            // All Characters
+            const charactersStr = localStorage.getItem('voiceBeyondCharacters');
+            const allCharacters = charactersStr ? JSON.parse(charactersStr) : [];
+            document.getElementById('allCharacters').textContent = JSON.stringify(allCharacters, null, 2);
+
+            // Current User's Characters
+            const currentUserId = userData?.id || 'guest';
+            const userCharacters = allCharacters.filter(char => char.userId === currentUserId);
+            document.getElementById('userCharacters').textContent = JSON.stringify(userCharacters, null, 2);
+
+            console.log('Current User ID:', currentUserId);
+            console.log('All Characters:', allCharacters);
+            console.log('User Characters:', userCharacters);
+        }
+
+        function createTestCharacter() {
+            const userData = JSON.parse(localStorage.getItem('voiceBeyondUser') || '{"id":"guest"}');
+            const currentUserId = userData.id || 'guest';
+
+            const testCharacter = {
+                id: 'char_' + Date.now(),
+                name: 'Grandpa',
+                relationship: 'Grandparent',
+                personality: 'Warm and Nurturing',
+                topics: 'Family stories, wisdom, life lessons',
+                voiceSample: null,
+                hasVoiceModel: false,
+                createdAt: new Date().toISOString(),
+                userId: currentUserId
+            };
+
+            const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+            characters.push(testCharacter);
+            localStorage.setItem('voiceBeyondCharacters', JSON.stringify(characters));
+
+            alert('✅ Test character "Grandpa" created!');
+            refreshData();
+        }
+
+        function clearAll() {
+            if (confirm('⚠️ This will delete ALL characters and chat data. Continue?')) {
+                localStorage.removeItem('voiceBeyondCharacters');
+                localStorage.removeItem('voiceBeyondUser');
+                alert('✅ All data cleared!');
+                refreshData();
+            }
+        }
+
+        // Load data on page load
+        window.onload = refreshData;
+    </script>
+</body>
+</html>

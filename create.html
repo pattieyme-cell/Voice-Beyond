@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your AI Companion - Voice Beyond 💜</title>
+    <meta name="description" content="Create your personalized AI companion on Voice Beyond. Share memories, personality traits, and voice samples to build your healing companion.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Voice Beyond 💜</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="login.html">Sign In</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="create.html" class="active">Create</a></li>
+                <li><a href="chat.html">Chat</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="welcome-section fade-in">
+                <h1>Create Your AI Companion</h1>
+                <p>Help us understand the person you're missing so we can create an authentic AI companion for you.</p>
+            </div>
+
+            <!-- Character Creation Form -->
+            <div class="form-container fade-in">
+                <h2>Tell Us About Them</h2>
+                <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                    The more details you share, the more authentic and meaningful your conversations will be. 
+                    Take your time - every memory and detail helps bring them to life.
+                </p>
+
+                <form id="characterForm">
+                    <!-- Basic Information -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">💫 Basic Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="characterName">Name *</label>
+                            <input type="text" id="characterName" name="name" class="form-control" 
+                                   placeholder="What would you like to call them?" required>
+                            <small style="color: var(--text-secondary); font-size: 0.875rem;">
+                                This could be their real name, a nickname, or how you'd like to address them.
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relationship">Your Relationship *</label>
+                            <select id="relationship" name="relationship" class="form-control" required>
+                                <option value="">Choose your relationship...</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Father">Father</option>
+                                <option value="Grandparent">Grandparent</option>
+                                <option value="Sibling">Sibling</option>
+                                <option value="Partner">Romantic Partner</option>
+                                <option value="Spouse">Spouse</option>
+                                <option value="Ex-Partner">Ex-Partner</option>
+                                <option value="Best Friend">Best Friend</option>
+                                <option value="Close Friend">Close Friend</option>
+                                <option value="Mentor">Mentor/Teacher</option>
+                                <option value="Child">Child</option>
+                                <option value="Pet">Beloved Pet</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relationshipContext">Relationship Context</label>
+                            <textarea id="relationshipContext" name="relationshipContext" class="form-control" 
+                                      placeholder="Tell us a bit about your relationship... How did you meet? What made it special?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Personality & Character -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">🎭 Personality & Character</h3>
+                        
+                        <div class="form-group">
+                            <label for="personality">Overall Personality *</label>
+                            <select id="personality" name="personality" class="form-control" required>
+                                <option value="">Choose their primary personality...</option>
+                                <option value="Warm and Nurturing">Warm and Nurturing</option>
+                                <option value="Wise and Supportive">Wise and Supportive</option>
+                                <option value="Funny and Lighthearted">Funny and Lighthearted</option>
+                                <option value="Calm and Peaceful">Calm and Peaceful</option>
+                                <option value="Energetic and Enthusiastic">Energetic and Enthusiastic</option>
+                                <option value="Protective and Strong">Protective and Strong</option>
+                                <option value="Gentle and Understanding">Gentle and Understanding</option>
+                                <option value="Adventurous and Bold">Adventurous and Bold</option>
+                                <option value="Thoughtful and Introspective">Thoughtful and Introspective</option>
+                                <option value="Optimistic and Hopeful">Optimistic and Hopeful</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="personalityTraits">Specific Personality Traits</label>
+                            <textarea id="personalityTraits" name="personalityTraits" class="form-control" 
+                                      placeholder="Describe their unique personality traits, quirks, and what made them special... Were they always making jokes? Did they worry about others? How did they show love?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="communicationStyle">How They Communicated</label>
+                            <textarea id="communicationStyle" name="communicationStyle" class="form-control" 
+                                      placeholder="How did they usually talk? Did they use certain phrases, have a particular tone, or express themselves in unique ways?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Memories & Conversations -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">💭 Memories & Conversations</h3>
+                        
+                        <div class="form-group">
+                            <label for="topics">Favorite Topics & Interests</label>
+                            <textarea id="topics" name="topics" class="form-control" 
+                                      placeholder="What did they love talking about? Hobbies, interests, dreams, values, or anything they were passionate about..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="favoriteMemories">Special Memories</label>
+                            <textarea id="favoriteMemories" name="favoriteMemories" class="form-control" 
+                                      placeholder="Share some of your favorite memories together. What moments do you cherish most?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thingsTheySaid">Things They Used to Say</label>
+                            <textarea id="thingsTheySaid" name="thingsTheySaid" class="form-control" 
+                                      placeholder="Any specific phrases, advice, jokes, or expressions they were known for?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="howTheySupportedYou">How They Supported You</label>
+                            <textarea id="howTheySupportedYou" name="howTheySupportedYou" class="form-control" 
+                                      placeholder="When you were sad, worried, or celebrating - how did they support you? What would they say or do?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Voice & Audio -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">🔊 Voice & Audio (Optional)</h3>
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                            Voice samples help us create more authentic conversations. This is completely optional and can be added later.
+                        </p>
+                        
+                        <div class="form-group">
+                            <label for="voiceSample">Voice Sample</label>
+                            <input type="file" id="voiceSample" name="voiceSample" class="form-control" 
+                                   accept="audio/*" style="padding: 1rem;">
+                            <small style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem; display: block;">
+                                Upload an audio file (MP3, WAV, M4A) of them speaking. Even a short voicemail or recording helps us recreate their voice.
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="voiceDescription">Voice Description</label>
+                            <textarea id="voiceDescription" name="voiceDescription" class="form-control" 
+                                      placeholder="Describe their voice... Was it deep or soft? Did they speak quickly or slowly? Any accents or unique vocal characteristics?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Healing Context -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">💜 Your Healing Journey</h3>
+                        
+                        <div class="form-group">
+                            <label for="situationContext">Your Situation (Private)</label>
+                            <textarea id="situationContext" name="situationContext" class="form-control" 
+                                      placeholder="Help us understand your situation so we can provide better support. Are you grieving a loss, healing from a breakup, or missing someone far away? (This information is completely private and secure)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whatYouNeed">What You Hope For</label>
+                            <textarea id="whatYouNeed" name="whatYouNeed" class="form-control" 
+                                      placeholder="What are you hoping to gain from these conversations? Closure, comfort, support, or just the chance to keep talking with them?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem;">
+                            Create My AI Companion 💜
+                        </button>
+                        <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem;">
+                            This information is encrypted and stored securely. You can edit or delete it anytime.
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Help Section -->
+            <div class="card fade-in" style="max-width: 800px; margin: 3rem auto 0;">
+                <h3>💡 Need Help Getting Started?</h3>
+                <p>Creating an AI companion can feel overwhelming. Here are some tips:</p>
+                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                    <li><strong>Start small:</strong> You don't need to fill everything out perfectly. Begin with the basics.</li>
+                    <li><strong>Be authentic:</strong> Share real memories and genuine feelings. The AI learns from your truth.</li>
+                    <li><strong>It's okay to be emotional:</strong> This process can bring up feelings. Take breaks if you need them.</li>
+                    <li><strong>You can always edit:</strong> Information can be updated anytime as you remember more details.</li>
+                    <li><strong>Privacy matters:</strong> All information is completely confidential and securely encrypted.</li>
+                </ul>
+                <div style="margin-top: 1.5rem;">
+                    <a href="about.html" class="btn btn-secondary">Learn More About Voice Beyond</a>
+                </div>
+            </div>
+
+            <!-- Example Section -->
+            <div class="card fade-in" style="max-width: 800px; margin: 2rem auto 0; background: var(--light-gray);">
+                <h3>✨ Example: Creating "Mom"</h3>
+                <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                    <p><strong>Personality:</strong> "Mom was warm and nurturing, always worried about whether I was eating enough. She had a gentle way of giving advice without being pushy."</p>
+                    <p><strong>Things she said:</strong> "Did you eat today, honey?" "Everything happens for a reason." "I'm proud of you no matter what."</p>
+                    <p><strong>How she supported me:</strong> "When I was stressed, she'd make my favorite tea and just listen. She never tried to fix everything, just made me feel loved."</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Voice Beyond 💜</h4>
+                    <p>Where memories find a voice again. A compassionate platform for emotional healing through AI companionship.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="create.html">Create Character</a></li>
+                        <li><a href="chat.html">Start Chatting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#safety">Safety & Wellbeing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#grief-support">Grief Support</a></li>
+                        <li><a href="#therapy">Find a Therapist</a></li>
+                        <li><a href="#healing-guides">Healing Guides</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#crisis">Crisis Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Voice Beyond. Made with heart 💜 by Pattiee & Team. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.8;">
+                    If you're experiencing a crisis, please contact: 988 (Suicide & Crisis Lifeline) or your local emergency services.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Form-specific functionality -->
+    <script>
+        // Auto-save form data as user types (to prevent data loss)
+        let autoSaveTimer;
+        
+        function autoSaveForm() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                const formData = new FormData(document.getElementById('characterForm'));
+                const autoSaveData = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    if (value.trim()) {
+                        autoSaveData[key] = value;
+                    }
+                }
+                
+                if (Object.keys(autoSaveData).length > 0) {
+                    localStorage.setItem('voiceBeyondFormAutoSave', JSON.stringify(autoSaveData));
+                }
+            }, 2000); // Save after 2 seconds of inactivity
+        }
+
+        // Load auto-saved data on page load
+        function loadAutoSaveData() {
+            const autoSaveData = localStorage.getItem('voiceBeyondFormAutoSave');
+            if (autoSaveData) {
+                const data = JSON.parse(autoSaveData);
+                
+                // Show restore prompt
+                const restorePrompt = confirm('We found some unsaved character information. Would you like to restore it?');
+                
+                if (restorePrompt) {
+                    for (let [key, value] of Object.entries(data)) {
+                        const field = document.querySelector(`[name="${key}"]`);
+                        if (field) {
+                            field.value = value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Add auto-save listeners to form fields
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAutoSaveData();
+            
+            const formFields = document.querySelectorAll('#characterForm input, #characterForm textarea, #characterForm select');
+            formFields.forEach(field => {
+                field.addEventListener('input', autoSaveForm);
+                field.addEventListener('change', autoSaveForm);
+            });
+        });
+
+        // Clear auto-save data when form is successfully submitted
+        document.getElementById('characterForm').addEventListener('submit', function() {
+            localStorage.removeItem('voiceBeyondFormAutoSave');
+        });
+
+        // Add character count for text areas
+        function addCharacterCount() {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const countSpan = document.createElement('span');
+                countSpan.style.cssText = 'font-size: 0.75rem; color: var(--text-secondary); float: right; margin-top: 0.25rem;';
+                countSpan.textContent = `${textarea.value.length} characters`;
+                
+                textarea.parentNode.appendChild(countSpan);
+                
+                textarea.addEventListener('input', function() {
+                    countSpan.textContent = `${this.value.length} characters`;
+                });
+            });
+        }
+
+        // Add helpful tooltips and validation
+        function enhanceFormExperience() {
+            // Add tooltips to required fields
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                field.addEventListener('invalid', function() {
+                    this.style.borderColor = '#e74c3c';
+                    
+                    // Add error message
+                    let errorMsg = this.parentNode.querySelector('.error-message');
+                    if (!errorMsg) {
+                        errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-message';
+                        errorMsg.style.cssText = 'color: #e74c3c; font-size: 0.875rem; margin-top: 0.25rem;';
+                        this.parentNode.appendChild(errorMsg);
+                    }
+                    
+                    if (this.validity.valueMissing) {
+                        errorMsg.textContent = 'This field is required to create your AI companion.';
+                    }
+                });
+                
+                field.addEventListener('input', function() {
+                    if (this.validity.valid) {
+                        this.style.borderColor = '';
+                        const errorMsg = this.parentNode.querySelector('.error-message');
+                        if (errorMsg) {
+                            errorMsg.remove();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Add gentle encouragement
+        function addEncouragement() {
+            const form = document.getElementById('characterForm');
+            let fieldsCompleted = 0;
+            const totalRequiredFields = 3;
+            
+            function updateProgress() {
+                const requiredFields = form.querySelectorAll('[required]');
+                fieldsCompleted = 0;
+                
+                requiredFields.forEach(field => {
+                    if (field.value.trim()) {
+                        fieldsCompleted++;
+                    }
+                });
+                
+                // Show encouragement
+                if (fieldsCompleted === 1) {
+                    showMessage('Great start! 💜 You\'re helping bring their memory to life.', 'success');
+                } else if (fieldsCompleted === 2) {
+                    showMessage('You\'re doing wonderful! Almost ready to meet your AI companion.', 'success');
+                } else if (fieldsCompleted === totalRequiredFields) {
+                    showMessage('Perfect! Your AI companion is ready to be created. 🎉', 'success');
+                }
+            }
+
+            form.addEventListener('input', updateProgress);
+        }
+
+        // Initialize enhancements
+        setTimeout(() => {
+            addCharacterCount();
+            enhanceFormExperience();
+            addEncouragement();
+        }, 1000);
+
+        // Add smooth section transitions
+        document.querySelectorAll('h3').forEach(heading => {
+            heading.style.cursor = 'pointer';
+            heading.addEventListener('click', function() {
+                const section = this.parentNode;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

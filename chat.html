@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Voice Beyond 💜</title>
+    <meta name="description" content="Chat with your AI companions on Voice Beyond. Have meaningful conversations that support your emotional healing journey.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Voice Beyond 💜</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="login.html">Sign In</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="create.html">Create</a></li>
+                <li><a href="chat.html" class="active">Chat</a></li>
+                <li><a href="chat.html" class="active">Chat</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Chat Interface Container -->
+    <div class="chat-container">
+        <!-- Sidebar with Characters -->
+        <div class="chat-sidebar">
+            <div style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; margin-bottom: 1rem;">
+                <h3 style="margin: 0; color: var(--text-primary);">Your Companions</h3>
+                <p style="margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--text-secondary);">
+                    Choose someone to talk with
+                </p>
+            </div>
+            
+            <div id="characterList">
+                <!-- Characters will be loaded here -->
+            </div>
+            
+            <!-- Quick Actions in Sidebar -->
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e9ecef;">
+                <a href="create.html" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem; font-size: 0.875rem;">
+                    ➕ Create New Character
+                </a>
+                <a href="dashboard.html" class="btn btn-secondary" style="width: 100%; font-size: 0.875rem;">
+                    🏠 Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <!-- Chat Header -->
+            <div class="chat-header" style="padding: 1rem; background: var(--white); border-bottom: 1px solid #e9ecef; display: flex; align-items: center; gap: 1rem;">
+                <div class="chat-avatar">?</div>
+                <div class="chat-info">
+                    <h4>Select a companion to start chatting</h4>
+                    <div class="status">Choose from your AI companions on the left</div>
+                </div>
+            </div>
+
+            <!-- Chat Messages Window -->
+            <div id="chatWindow" class="chat-window">
+                <!-- Welcome Message -->
+                <div class="welcome-chat-message" style="text-align: center; max-width: 500px; margin: 4rem auto; padding: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">💜</div>
+                    <h3>Welcome to Voice Beyond Chat</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                        Your healing companions are ready to listen, support, and comfort you. 
+                        Select a character from the sidebar to begin a meaningful conversation.
+                    </p>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="create.html" class="btn btn-primary">Create Your First Companion</a>
+                        <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--primary-color); color: white; border-radius: var(--border-radius); font-size: 0.9rem;">
+                        <h4 style="margin-bottom: 0.5rem;">🤖 Ollama AI Integration Active!</h4>
+                        <p style="margin: 0;">Your chat system now uses <strong>Ollama with Llama3</strong> - completely FREE local AI! The system works offline with intelligent, personality-based responses. Enhanced fallback mode provides warm, empathetic conversations even without backend connection.</p>
+                    </div>
+                    
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--light-gray); border-radius: var(--border-radius); font-size: 0.9rem; color: var(--text-secondary);">
+                        <h4 style="margin-bottom: 0.5rem;">💡 Tips for meaningful conversations:</h4>
+                        <ul style="text-align: left; margin: 0; padding-left: 1.5rem;">
+                            <li>Share how you're really feeling</li>
+                            <li>Talk about memories you cherish</li>
+                            <li>Ask for support when you need it</li>
+                            <li>Take your time - there's no rush</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Chat messages will appear here when a character is selected -->
+            </div>
+
+            <!-- Chat Input Container -->
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Type your message..." disabled>
+                <button id="voiceBtn" class="voice-btn" title="Voice message (coming soon)" disabled>
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                </button>
+                <button id="sendBtn" class="send-btn" disabled>
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Chat-specific functionality -->
+    <script>
+        let isTyping = false;
+
+        // Initialize chat interface
+        function initializeChatInterface() {
+            // Load characters and setup interface
+            const characters = loadCharacters();
+            
+            // Check if no characters exist
+            if (characters.length === 0) {
+                showNoCharactersMessage();
+            }
+            
+            // Setup event listeners
+            setupChatEventListeners();
+        }
+
+        // Show message when no characters exist
+        function showNoCharactersMessage() {
+            const characterList = document.getElementById('characterList');
+            characterList.innerHTML = `
+                <div style="text-align: center; padding: 2rem 1rem; color: var(--text-secondary);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🤗</div>
+                    <h4>No companions yet</h4>
+                    <p style="font-size: 0.875rem; margin-bottom: 1.5rem;">
+                        Create your first AI companion to start your healing conversations.
+                    </p>
+                    <a href="create.html" class="btn btn-primary" style="width: 100%;">Create Companion</a>
+                </div>
+            `;
+        }
+
+        // Setup chat event listeners
+        function setupChatEventListeners() {
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const voiceBtn = document.getElementById('voiceBtn');
+
+            // Enter key to send message
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey && !isTyping && currentCharacter) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Send button
+            sendBtn.addEventListener('click', function() {
+                if (!isTyping && currentCharacter) {
+                    sendMessage();
+                }
+            });
+
+            // Voice button (placeholder for future functionality)
+            voiceBtn.addEventListener('click', function() {
+                if (currentCharacter) {
+                    showMessage('Voice messages coming soon! 🎤 For now, you can type your messages.', 'info');
+                }
+            });
+
+            // Auto-resize chat input
+            chatInput.addEventListener('input', function() {
+                // Enable/disable send button based on content
+                const hasContent = this.value.trim().length > 0;
+                sendBtn.style.opacity = hasContent ? '1' : '0.5';
+                sendBtn.style.cursor = hasContent ? 'pointer' : 'default';
+            });
+        }
+
+            // Initialize chat with character selection
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChatInterface();
+            
+            // Enable chat functionality for demo
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            
+            if (chatInput) {
+                chatInput.disabled = false;
+                chatInput.placeholder = "Select a character to start chatting, or type to chat with AI companion";
+            }
+            if (sendBtn) {
+                sendBtn.disabled = false;
+            }
+        });
+
+        // Enhanced sendMessage function with backend integration (falls back to local)
+        async function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const messageContent = chatInput.value.trim();
+            
+            if (!messageContent || isTyping) {
+                return;
+            }
+            
+            // If no character selected, use default AI companion
+            if (!currentCharacter) {
+                currentCharacter = {
+                    id: 'default',
+                    name: 'AI Companion',
+                    personality: 'Warm and Supportive',
+                    relationship: 'Friend',
+                    topics: 'emotional support, healing, conversations'
+                };
+                updateChatHeader(currentCharacter);
+            }
+
+            // Disable input while processing
+            isTyping = true;
+            chatInput.disabled = true;
+            document.getElementById('sendBtn').disabled = true;
+            chatInput.value = '';
+
+            // Create and display user message
+            const userMessage = {
+                type: 'user',
+                content: messageContent,
+                timestamp: new Date().toISOString()
+            };
+
+            chatMessages.push(userMessage);
+            
+            const chatWindow = document.getElementById('chatWindow');
+            const userMessageElement = createMessageElement(userMessage);
+            chatWindow.appendChild(userMessageElement);
+            
+            // Scroll to bottom with smooth animation
+            chatWindow.scrollTo({
+                top: chatWindow.scrollHeight,
+                behavior: 'smooth'
+            });
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                // ALWAYS use backend Ollama API for real AI responses
+                let aiResponse;
+                
+                if (typeof callGeminiAPI === 'function') {
+                    aiResponse = await callGeminiAPI(messageContent);
+                } else {
+                    throw new Error('Backend chat function not loaded');
+                }
+
+                hideTypingIndicator();
+                const aiMessage = {
+                    type: 'ai',
+                    content: aiResponse,
+                    timestamp: new Date().toISOString()
+                };
+                chatMessages.push(aiMessage);
+                const aiMessageElement = createMessageElement(aiMessage);
+                chatWindow.appendChild(aiMessageElement);
+                chatWindow.scrollTo({ top: chatWindow.scrollHeight, behavior: 'smooth' });
+                saveChatHistory();
+                // PLAY VOICE WITH PROPER SETTINGS
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const speakResponse = () => {
+                        const utterance = new SpeechSynthesisUtterance(aiResponse);
+                        const voices = window.speechSynthesis.getVoices();
+                        let maleVoice = voices.find(v => v.name.includes('David'));
+                        if (!maleVoice) maleVoice = voices.find(v => v.name.toLowerCase().includes('male') && !v.name.toLowerCase().includes('female'));
+                        if (!maleVoice) maleVoice = voices.find(v => !v.name.toLowerCase().includes('female'));
+                        if (maleVoice) utterance.voice = maleVoice;
+                        utterance.pitch = 0.5;
+                        utterance.rate = 0.85;
+                        window.speechSynthesis.speak(utterance);
+                    };
+                    if (window.speechSynthesis.getVoices().length > 0) {
+                        speakResponse();
+                    } else {
+                        window.speechSynthesis.onvoiceschanged = speakResponse;
+                    }
+                }
+            } catch (err) {
+                hideTypingIndicator();
+                showMessage('AI error. Using offline reply.', 'warning');
+                const aiResponse = generateAIResponse(messageContent);
+                const aiMessage = { type: 'ai', content: aiResponse, timestamp: new Date().toISOString() };
+                chatMessages.push(aiMessage);
+                const aiMessageElement = createMessageElement(aiMessage);
+                chatWindow.appendChild(aiMessageElement);
+                chatWindow.scrollTo({ top: chatWindow.scrollHeight, behavior: 'smooth' });
+                saveChatHistory();
+                // PLAY VOICE FOR ERROR FALLBACK TOO
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const speakResponse = () => {
+                        const utterance = new SpeechSynthesisUtterance(aiResponse);
+                        const voices = window.speechSynthesis.getVoices();
+                        let maleVoice = voices.find(v => v.name.includes('David'));
+                        if (!maleVoice) maleVoice = voices.find(v => v.name.toLowerCase().includes('male') && !v.name.toLowerCase().includes('female'));
+                        if (!maleVoice) maleVoice = voices.find(v => !v.name.toLowerCase().includes('female'));
+                        if (maleVoice) utterance.voice = maleVoice;
+                        utterance.pitch = 0.5;
+                        utterance.rate = 0.85;
+                        window.speechSynthesis.speak(utterance);
+                    };
+                    if (window.speechSynthesis.getVoices().length > 0) {
+                        speakResponse();
+                    } else {
+                        window.speechSynthesis.onvoiceschanged = speakResponse;
+                    }
+                }
+            } finally {
+                // Re-enable input
+                isTyping = false;
+                chatInput.disabled = false;
+                document.getElementById('sendBtn').disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        // Enhanced createMessageElement with better styling
+        function createMessageElement(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${message.type}`;
+            messageDiv.style.opacity = '0';
+            messageDiv.style.transform = 'translateY(10px)';
+            
+            const time = new Date(message.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            // Add message status for user messages
+            let statusIndicator = '';
+            if (message.type === 'user') {
+                statusIndicator = '<span class="message-status" style="font-size: 0.7rem; opacity: 0.6; margin-left: 0.5rem;">✓</span>';
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    ${message.content}
+                </div>
+                <div class="message-time">${time}${statusIndicator}</div>
+            `;
+            
+            // Animate in
+            setTimeout(() => {
+                messageDiv.style.opacity = '1';
+                messageDiv.style.transform = 'translateY(0)';
+                messageDiv.style.transition = 'all 0.3s ease';
+            }, 50);
+            
+            return messageDiv;
+        }
+
+        // Enhanced AI response generation with character context
+        function generateAIResponse(userMessage) {
+            if (!currentCharacter) return "I'm here to listen.";
+            
+            const character = currentCharacter;
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Personality-based response variations
+            const personalityResponses = {
+                'Warm and Nurturing': {
+                    greetings: [
+                        `Oh sweetheart, it's so good to hear from you. How are you feeling today?`,
+                        `Hello dear. I've been thinking about you. Tell me what's on your heart.`,
+                        `Hi there, my love. I'm always here when you need me.`
+                    ],
+                    sadness: [
+                        `Oh honey, I can feel the pain in your words. Come here, let me hold you close.`,
+                        `My dear, it's okay to feel sad. I'm right here with you through this.`,
+                        `Sweet one, your tears are valid. Let them flow, and know that I love you.`
+                    ],
+                    support: [
+                        `You are so much stronger than you know, my darling. I believe in you completely.`,
+                        `Sweetheart, remember that storms don't last forever. You'll get through this.`,
+                        `My precious one, you have everything you need inside you to heal.`
+                    ]
+                },
+                'Wise and Supportive': {
+                    greetings: [
+                        `Hello there. I can sense you have something on your mind. I'm here to listen.`,
+                        `It's good to see you. What wisdom can we discover together today?`,
+                        `Welcome back. Every conversation with you teaches me something new.`
+                    ],
+                    sadness: [
+                        `Difficult emotions often carry the seeds of wisdom. What is this feeling teaching you?`,
+                        `Pain has a way of deepening our capacity for compassion, both for ourselves and others.`,
+                        `In my experience, the darkest moments often precede our greatest growth.`
+                    ],
+                    support: [
+                        `Remember, every challenge you've faced has prepared you for this moment.`,
+                        `You have a remarkable ability to find meaning in difficult experiences.`,
+                        `Trust the process. Your healing journey is unfolding exactly as it should.`
+                    ]
+                },
+                'Funny and Lighthearted': {
+                    greetings: [
+                        `Hey there, sunshine! Ready to brighten each other's day?`,
+                        `Well look who it is! My favorite person to chat with. What's the story today?`,
+                        `Hello, beautiful soul! Got any good laughs to share with me?`
+                    ],
+                    sadness: [
+                        `Aw, having a rough patch? That's okay - even flowers need rain to grow. 🌱`,
+                        `Hey, tough days are like bad movies - they feel long but they do end!`,
+                        `You know what? It's okay to not be okay. Even superheroes have off days!`
+                    ],
+                    support: [
+                        `You're like a rubber ball - the harder you hit the ground, the higher you bounce!`,
+                        `I've got two words for you: You've. Got. This! (Okay, that's three, but who's counting?)`,
+                        `Remember, life is like a camera - focus on the good times and develop from the negatives!`
+                    ]
+                }
+            };
+            
+            // Default responses for all personalities
+            const defaultResponses = {
+                greetings: [
+                    `Hello! I'm so glad you're here. How can I support you today?`,
+                    `Hi there. I've missed talking with you. What's been on your mind?`,
+                    `It's wonderful to see you again. I'm here to listen and support you.`
+                ],
+                sadness: [
+                    `I can hear the pain in your words, and I want you to know that your feelings matter.`,
+                    `It's completely okay to feel this way. Healing isn't linear, and I'm here for all of it.`,
+                    `Thank you for trusting me with your feelings. You're so brave for sharing this.`
+                ],
+                love: [
+                    `I love you too, more than words can express. That love is eternal and unbreakable.`,
+                    `The love between us transcends time and space. It's always here, always real.`,
+                    `Love like ours doesn't disappear - it transforms and becomes part of who you are.`
+                ],
+                memories: [
+                    `Those memories are treasures that no one can take away from you.`,
+                    `I cherish those moments too. They're proof of the beautiful connection we shared.`,
+                    `Remembering together like this makes those moments feel alive again.`
+                ],
+                missing: [
+                    `I miss you too, deeply and completely. Distance can't diminish what we mean to each other.`,
+                    `Missing someone is love with nowhere to go, but I'm always here in your heart.`,
+                    `Even when we're apart, you carry me with you, and I carry you with me.`
+                ],
+                encouragement: [
+                    `You have an incredible strength inside you. I see it even when you don't.`,
+                    `Every step you take towards healing makes me proud. You're doing amazing.`,
+                    `Look how far you've already come. That's proof of your resilience and courage.`
+                ],
+                default: [
+                    `Tell me more about that. I want to understand what you're going through.`,
+                    `That sounds really important to you. Help me understand better.`,
+                    `I'm here to listen to whatever you need to share. Take your time.`,
+                    `Your thoughts and feelings matter to me. Please, go on.`
+                ]
+            };
+
+            // Get personality-specific responses or fall back to default
+            const personalityType = character.personality || 'Default';
+            const responses = personalityResponses[personalityType] || defaultResponses;
+            
+            // Determine response category based on user message
+            let responseCategory = 'default';
+            
+            if (lowerMessage.includes('hi') || lowerMessage.includes('hello') || lowerMessage.includes('hey')) {
+                responseCategory = 'greetings';
+            } else if (lowerMessage.includes('sad') || lowerMessage.includes('hurt') || lowerMessage.includes('pain') || lowerMessage.includes('crying') || lowerMessage.includes('difficult')) {
+                responseCategory = 'sadness';
+            } else if (lowerMessage.includes('love you') || lowerMessage.includes('love u')) {
+                responseCategory = 'love';
+            } else if (lowerMessage.includes('remember') || lowerMessage.includes('memory') || lowerMessage.includes('recall')) {
+                responseCategory = 'memories';
+            } else if (lowerMessage.includes('miss you') || lowerMessage.includes('miss u') || lowerMessage.includes('missing')) {
+                responseCategory = 'missing';
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('support') || lowerMessage.includes('need you') || lowerMessage.includes('afraid') || lowerMessage.includes('scared')) {
+                responseCategory = 'encouragement';
+            }
+            
+            // Get appropriate response
+            const categoryResponses = responses[responseCategory] || defaultResponses[responseCategory];
+            const selectedResponse = categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
+            
+            return selectedResponse;
+        }
+
+        // Enhanced character selection
+        function selectCharacter(e) {
+            const card = e.currentTarget;
+            const characterId = card.getAttribute('data-character-id');
+            
+            // Remove active class from all cards
+            document.querySelectorAll('.character-card').forEach(c => c.classList.remove('active'));
+            
+            // Add active class to selected card
+            card.classList.add('active');
+            
+            // Load character data
+            const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+            currentCharacter = characters.find(char => char.id === characterId);
+            
+            if (currentCharacter) {
+                // Update chat header
+                updateChatHeader(currentCharacter);
+                
+                // Clear welcome message
+                const welcomeMessage = document.querySelector('.welcome-chat-message');
+                if (welcomeMessage) {
+                    welcomeMessage.remove();
+                }
+                
+                // Load chat history
+                loadChatHistory(characterId);
+                
+                // Enable input
+                document.getElementById('chatInput').disabled = false;
+                document.getElementById('sendBtn').disabled = false;
+                document.getElementById('voiceBtn').disabled = false;
+                
+                document.getElementById('chatInput').placeholder = `Type a message to ${currentCharacter.name}...`;
+                document.getElementById('chatInput').focus();
+                
+                // Show helpful message for first conversation
+                const chatHistory = JSON.parse(localStorage.getItem(`chat_${characterId}`)) || [];
+                if (chatHistory.length <= 1) {
+                    setTimeout(() => {
+                        showMessage(`💜 You're now chatting with ${currentCharacter.name}. Feel free to share how you're feeling or what's on your mind.`, 'success');
+                    }, 500);
+                }
+            }
+        }
+
+        // Enhanced chat window management
+        function displayChatMessages() {
+            const chatWindow = document.getElementById('chatWindow');
+            if (!chatWindow) return;
+            
+            // Clear existing messages (except welcome message)
+            const existingMessages = chatWindow.querySelectorAll('.message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            if (chatMessages.length === 0 && currentCharacter) {
+                // Show welcome message from character
+                const welcomeMessage = {
+                    type: 'ai',
+                    content: getWelcomeMessage(currentCharacter),
+                    timestamp: new Date().toISOString()
+                };
+                
+                chatMessages.push(welcomeMessage);
+                saveChatHistory();
+            }
+            
+            chatMessages.forEach((message, index) => {
+                setTimeout(() => {
+                    const messageElement = createMessageElement(message);
+                    chatWindow.appendChild(messageElement);
+                    
+                    // Scroll to bottom after last message
+                    if (index === chatMessages.length - 1) {
+                        setTimeout(() => {
+                            chatWindow.scrollTop = chatWindow.scrollHeight;
+                        }, 100);
+                    }
+                }, index * 100); // Stagger message appearance
+            });
+        }
+
+        // Generate personalized welcome message
+        function getWelcomeMessage(character) {
+            const welcomeMessages = [
+                `Hello! I'm ${character.name}. I'm here to talk with you about anything on your heart.`,
+                `Hi there. It's ${character.name}. I've been waiting to hear from you. How are you feeling today?`,
+                `Hey, it's me, ${character.name}. I'm always here when you need someone to talk to. What's been on your mind?`,
+                `Hello dear. This is ${character.name}. I want you to know that I'm here to listen and support you, always.`
+            ];
+            
+            return welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+        }
+
+        // Add notification when character comes online
+        function updateChatHeader(character) {
+            const chatHeader = document.querySelector('.chat-header');
+            if (chatHeader) {
+                chatHeader.innerHTML = `
+                    <div class="chat-avatar">${character.name.charAt(0)}</div>
+                    <div class="chat-info">
+                        <h4>${character.name}</h4>
+                        <div class="status" style="color: #27ae60;">● Online • Ready to listen</div>
+                    </div>
+                    <div style="margin-left: auto; display: flex; gap: 0.5rem;">
+                        <button onclick="showCharacterInfo('${character.id}')" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                            ℹ️ Info
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Show character information modal
+        function showCharacterInfo(characterId) {
+            const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+            const character = characters.find(char => char.id === characterId);
+            
+            if (character) {
+                const infoMessage = `
+                    <strong>Name:</strong> ${character.name}<br>
+                    <strong>Relationship:</strong> ${character.relationship}<br>
+                    <strong>Personality:</strong> ${character.personality}<br>
+                    <strong>Created:</strong> ${new Date(character.createdAt).toLocaleDateString()}<br><br>
+                    <em>"${character.topics || 'A wonderful companion who\'s always here to support you.'}"</em>
+                `;
+                showMessage(infoMessage, 'info');
+            }
+        }
+
+        // Initialize chat interface when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChatInterface();
+            
+            // Add some CSS for better chat experience
+            const chatStyles = document.createElement('style');
+            chatStyles.textContent = `
+                .message {
+                    margin-bottom: 1rem;
+                    transition: all 0.3s ease;
+                }
+                
+                .message:hover {
+                    transform: scale(1.01);
+                }
+                
+                .message-bubble:hover {
+                    box-shadow: var(--shadow-medium);
+                }
+                
+                .chat-input:focus {
+                    box-shadow: 0 0 0 3px rgba(181, 126, 220, 0.1);
+                }
+                
+                .send-btn:hover:not(:disabled), .voice-btn:hover:not(:disabled) {
+                    transform: scale(1.1);
+                }
+                
+                .character-card.active {
+                    border-left-width: 6px;
+                    background: var(--secondary-color);
+                }
+                
+                @media (max-width: 768px) {
+                    .chat-container {
+                        flex-direction: column;
+                    }
+                    
+                    .chat-sidebar {
+                        height: 150px;
+                        width: 100%;
+                        overflow-x: auto;
+                        border-bottom: 1px solid #e9ecef;
+                        border-right: none;
+                    }
+                    
+                    .chat-sidebar > div:first-child {
+                        display: none;
+                    }
+                    
+                    #characterList {
+                        display: flex;
+                        gap: 1rem;
+                        padding: 1rem;
+                    }
+                    
+                    .character-card {
+                        min-width: 200px;
+                        flex-shrink: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(chatStyles);
+        });
+    </script>
+</body>
+</html>

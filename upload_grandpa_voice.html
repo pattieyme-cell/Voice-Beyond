@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Grandpa Voice Model - Voice Beyond</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .upload-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Upload Grandpa's Voice Model 💜</h1>
+        <p style="color: #666; margin-bottom: 2rem;">
+            Upload the PTH voice model file for your grandpa character to enable voice cloning.
+        </p>
+
+        <div class="upload-form">
+            <div class="form-group">
+                <label for="characterSelect">Select Character:</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <select id="characterSelect" class="form-control" style="flex: 1;">
+                        <option value="">Loading characters...</option>
+                    </select>
+                    <button type="button" onclick="refreshCharacters()" class="btn" style="background: #27ae60; color: white; padding: 0.5rem 1rem;" title="Refresh character list">
+                        🔄
+                    </button>
+                </div>
+                <small style="color: #666; margin-top: 0.5rem; display: block;">
+                    Character not showing? Click the refresh button (🔄) or <a href="dashboard.html">create one first</a>.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="modelFile">Voice Model File (.pth):</label>
+                <input type="file" id="modelFile" accept=".pth" class="form-control">
+                <small style="color: #666;">
+                    Path to grandpa's model: C:\Users\patri\Downloads\kamal_50e_1750s.pth
+                </small>
+            </div>
+
+            <button id="uploadBtn" class="btn btn-primary">
+                Upload Voice Model
+            </button>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+            <h3>How to Use:</h3>
+            <ol style="line-height: 1.8;">
+                <li>Select your grandpa character from the dropdown</li>
+                <li>Click "Choose File" and select the kamal_50e_1750s.pth file</li>
+                <li>Click "Upload Voice Model"</li>
+                <li>Once uploaded, voice responses will use the cloned voice in chat!</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 1rem; text-align: center;">
+            <a href="dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const status = document.getElementById('status');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const characterSelect = document.getElementById('characterSelect');
+        const modelFileInput = document.getElementById('modelFile');
+
+        // Load characters on page load
+        function loadCharacters() {
+            try {
+                console.log('Loading characters...');
+                const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+                console.log('All characters:', characters);
+                
+                const userDataStr = localStorage.getItem('voiceBeyondUser');
+                console.log('User data string:', userDataStr);
+                
+                const userData = userDataStr ? JSON.parse(userDataStr) : null;
+                const currentUserId = userData?.id || 'guest';
+                console.log('Current user ID:', currentUserId);
+                
+                const userCharacters = characters.filter(char => char.userId === currentUserId);
+                console.log('User characters:', userCharacters);
+
+                characterSelect.innerHTML = '';
+
+                if (userCharacters.length === 0) {
+                    characterSelect.innerHTML = '<option value="">No characters found. Create one first.</option>';
+                    uploadBtn.disabled = true;
+                    showStatus('⚠️ No characters found. Please create a character first from the dashboard.', 'error');
+                    return;
+                }
+
+                // Add default option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '-- Select Character --';
+                characterSelect.appendChild(defaultOption);
+
+                userCharacters.forEach(char => {
+                    const option = document.createElement('option');
+                    option.value = char.id;
+                    option.textContent = `${char.name} (${char.relationship})`;
+                    characterSelect.appendChild(option);
+                });
+
+                // Auto-select if there's only one character
+                if (userCharacters.length === 1) {
+                    characterSelect.value = userCharacters[0].id;
+                }
+                
+                uploadBtn.disabled = false;
+                console.log('Characters loaded successfully!');
+
+            } catch (error) {
+                console.error('Error loading characters:', error);
+                showStatus('Failed to load characters: ' + error.message, 'error');
+            }
+        }
+
+        // Upload model
+        async function uploadModel() {
+            const characterId = characterSelect.value;
+            const modelFile = modelFileInput.files[0];
+
+            if (!characterId) {
+                showStatus('Please select a character', 'error');
+                return;
+            }
+
+            if (!modelFile) {
+                showStatus('Please select a .pth model file', 'error');
+                return;
+            }
+
+            if (!modelFile.name.endsWith('.pth')) {
+                showStatus('File must be a .pth model file', 'error');
+                return;
+            }
+
+            uploadBtn.disabled = true;
+            showStatus('Uploading voice model... Please wait.', 'info');
+
+            try {
+                const formData = new FormData();
+                formData.append('model_file', modelFile);
+                formData.append('character_id', characterId);
+
+                const response = await fetch(`${API_BASE_URL}/upload-model`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showStatus('✅ Voice model uploaded successfully! Your character can now speak with the cloned voice.', 'success');
+                    
+                    // Update character in localStorage
+                    const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+                    const charIndex = characters.findIndex(c => c.id === characterId);
+                    if (charIndex >= 0) {
+                        characters[charIndex].hasVoiceModel = true;
+                        characters[charIndex].modelFileName = data.model_filename;
+                        localStorage.setItem('voiceBeyondCharacters', JSON.stringify(characters));
+                    }
+
+                    // Clear file input
+                    modelFileInput.value = '';
+
+                    setTimeout(() => {
+                        if (confirm('Voice model uploaded! Go to chat now?')) {
+                            window.location.href = 'chat.html';
+                        }
+                    }, 2000);
+                } else {
+                    showStatus('❌ Upload failed: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showStatus('❌ Error: ' + error.message, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+            }
+        }
+
+        function showStatus(message, type) {
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+        }
+
+        // Event listeners
+        uploadBtn.addEventListener('click', uploadModel);
+        
+        // Load characters immediately when script runs
+        console.log('Script loaded, calling loadCharacters...');
+        loadCharacters();
+        
+        // Also load on DOMContentLoaded as backup
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded fired, loading characters again...');
+            loadCharacters();
+        });
+        
+        // Add refresh button functionality
+        window.refreshCharacters = loadCharacters;
+    </script>
+</body>
+</html>

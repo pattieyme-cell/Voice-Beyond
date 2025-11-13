@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Test</title>
+</head>
+<body>
+    <h1>Voice Test</h1>
+    <button onclick="testVoice()">Test Voice</button>
+    
+    <script>
+        function testVoice() {
+            const text = "Hello! This is a test of the voice synthesis system.";
+            
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                const voices = window.speechSynthesis.getVoices();
+                
+                console.log('Available voices:', voices.map(v => v.name));
+                
+                let maleVoice = voices.find(v => v.name.includes('David'));
+                if (!maleVoice) {
+                    maleVoice = voices.find(v => 
+                        v.name.toLowerCase().includes('male') && 
+                        !v.name.toLowerCase().includes('female')
+                    );
+                }
+                
+                if (maleVoice) {
+                    utterance.voice = maleVoice;
+                    console.log('Using voice:', maleVoice.name);
+                } else {
+                    console.log('Using default voice');
+                }
+                
+                utterance.pitch = 0.5;
+                utterance.rate = 0.85;
+                
+                utterance.onstart = () => console.log('Voice started');
+                utterance.onend = () => console.log('Voice ended');
+                utterance.onerror = (e) => console.error('Voice error:', e);
+                
+                window.speechSynthesis.speak(utterance);
+                alert('Voice should be playing now!');
+            } else {
+                alert('Speech synthesis not supported in this browser!');
+            }
+        }
+        
+        // Load voices
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => {
+            console.log('Voices loaded:', window.speechSynthesis.getVoices().length);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Beyond - Quick Start Guide 💜</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+        h2 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .command-box {
+            background: #2d3748;
+            color: #68d391;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success { background: #48bb78; }
+        .btn-success:hover { background: #38a169; }
+        .warning {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        ul, ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+        code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #e53e3e;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🎤 Voice Beyond - Quick Start</h1>
+            <p style="color: #666; font-size: 1.1rem;">Get grandpa's voice working in 3 easy steps!</p>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="card">
+            <h2><span class="step-number">1</span> Start Backend Server</h2>
+            <p><strong>What it does:</strong> Handles voice model uploads and voice cloning</p>
+            
+            <div class="warning">
+                ⚠️ <strong>IMPORTANT:</strong> Backend must be running for voice upload to work!
+            </div>
+
+            <p><strong>Method 1 (Double-click):</strong></p>
+            <ol>
+                <li>Go to <code>C:\voice beyond</code> folder</li>
+                <li>Double-click <code>START_BACKEND.bat</code></li>
+                <li>A black window will open - keep it running!</li>
+            </ol>
+
+            <p style="margin-top: 1rem;"><strong>Method 2 (Command):</strong></p>
+            <div class="command-box">
+cd "C:\voice beyond\backend"<br>
+py app.py
+            </div>
+
+            <div class="success">
+                ✅ Backend is ready when you see: "Server ready at http://localhost:5000"
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="card">
+            <h2><span class="step-number">2</span> Setup Grandpa Character & Upload Voice</h2>
+            
+            <a href="setup_grandpa.html" class="btn btn-success">🚀 Open Setup Wizard</a>
+            
+            <p style="margin-top: 1rem;"><strong>In the setup wizard:</strong></p>
+            <ol>
+                <li>Click "Check Status" to see current characters</li>
+                <li>Create "Grandpa" character if not exists</li>
+                <li>Select grandpa from dropdown</li>
+                <li>Upload <code>kamal_50e_1750s.pth</code> from Downloads folder</li>
+                <li>Wait for success message!</li>
+            </ol>
+
+            <div class="warning">
+                📁 <strong>Voice Model Location:</strong><br>
+                <code>C:\Users\patri\Downloads\kamal_50e_1750s.pth</code>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="card">
+            <h2><span class="step-number">3</span> Test in Chat</h2>
+            
+            <a href="chat.html" class="btn">💬 Go to Chat</a>
+            <a href="dashboard.html" class="btn">📊 Dashboard</a>
+            
+            <p style="margin-top: 1rem;"><strong>In chat:</strong></p>
+            <ol>
+                <li>Select "Grandpa" from sidebar (left side)</li>
+                <li>Type a message and press Enter</li>
+                <li>AI will respond with grandpa's cloned voice! 🎤</li>
+            </ol>
+
+            <div class="success">
+                🎉 <strong>Voice should play automatically!</strong><br>
+                If no sound, check browser volume and microphone permissions.
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="card">
+            <h2>🔧 Troubleshooting</h2>
+            
+            <h3 style="color: #e53e3e; margin-top: 1rem;">❌ "Failed to fetch" error:</h3>
+            <ul>
+                <li>Backend is not running - start it using Step 1</li>
+                <li>Check backend window for errors</li>
+            </ul>
+
+            <h3 style="color: #e53e3e; margin-top: 1rem;">❌ No characters in dropdown:</h3>
+            <ul>
+                <li>Click the 🔄 refresh button</li>
+                <li>Check <a href="debug_characters.html">debug page</a></li>
+                <li>Create character using setup wizard</li>
+            </ul>
+
+            <h3 style="color: #e53e3e; margin-top: 1rem;">❌ Voice not playing:</h3>
+            <ul>
+                <li>Make sure character has voice model uploaded (🎤 icon)</li>
+                <li>Check browser console (F12) for errors</li>
+                <li>Ensure backend is running</li>
+                <li>Try refreshing the page</li>
+            </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card">
+            <h2>🔗 Quick Links</h2>
+            <a href="setup_grandpa.html" class="btn">🎤 Setup Wizard</a>
+            <a href="upload_grandpa_voice.html" class="btn">📤 Upload Voice</a>
+            <a href="chat.html" class="btn">💬 Chat</a>
+            <a href="dashboard.html" class="btn">📊 Dashboard</a>
+            <a href="debug_characters.html" class="btn">🔍 Debug</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+            <h2 style="color: white;">💜 Made with Love</h2>
+            <p>Voice Beyond - Where memories find a voice again</p>
+        </div>
+    </div>
+</body>
+</html>

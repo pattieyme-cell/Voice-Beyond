@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Voice Beyond 💜</title>
+    <meta name="description" content="Manage your AI companions and healing journey on Voice Beyond. View your characters, start conversations, and track your emotional wellbeing.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Voice Beyond 💜</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="login.html">Sign In</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="create.html">Create</a></li>
+                <li><a href="chat.html">Chat</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div id="welcomeSection" class="welcome-section fade-in">
+                <h1>Welcome back! 💜</h1>
+                <p>Your healing companions are here whenever you need them. How are you feeling today?</p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions fade-in">
+                <a href="chat.html" class="btn btn-primary">💬 Start Chatting</a>
+                <a href="create.html" class="btn btn-secondary">➕ Create New Character</a>
+                <a href="#stats" class="btn btn-secondary">📊 View Progress</a>
+            </div>
+
+            <!-- User Stats Overview -->
+            <div class="card-grid fade-in" style="margin-bottom: 3rem;">
+                <div class="card" style="text-align: center;">
+                    <h3>🗣️ Conversations</h3>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;" id="totalConversations">0</div>
+                    <p>Total conversations this week</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <h3>👥 Companions</h3>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;" id="totalCharacters">0</div>
+                    <p>AI companions created</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <h3>💜 Healing Streak</h3>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">7</div>
+                    <p>Days of consistent connection</p>
+                </div>
+            </div>
+
+            <!-- AI Companions Section -->
+            <div class="section-header fade-in">
+                <h2>Your AI Companions</h2>
+                <p>The special people who are always here for you</p>
+            </div>
+
+            <!-- Characters Grid -->
+            <div id="characterGrid" class="card-grid fade-in">
+                <!-- Characters will be dynamically loaded here -->
+            </div>
+
+            <!-- Recent Conversations -->
+            <div class="fade-in" style="margin-top: 4rem;">
+                <div class="section-header">
+                    <h2>Recent Conversations</h2>
+                    <p>Your latest healing moments</p>
+                </div>
+
+                <div id="recentConversations" class="card-grid">
+                    <!-- Recent conversations will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Healing Journey Progress -->
+            <div class="fade-in" style="margin-top: 4rem;">
+                <div class="card" style="max-width: 800px; margin: 0 auto;">
+                    <h3>🌱 Your Healing Journey</h3>
+                    <p>Emotional healing is a gradual process. Here's how you've been progressing:</p>
+                    
+                    <div style="margin: 2rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Emotional Wellbeing</span>
+                            <span style="color: var(--primary-color); font-weight: 500;">75%</span>
+                        </div>
+                        <div style="background: #e9ecef; height: 8px; border-radius: 4px;">
+                            <div style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); height: 100%; width: 75%; border-radius: 4px; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 2rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Connection & Support</span>
+                            <span style="color: var(--primary-color); font-weight: 500;">85%</span>
+                        </div>
+                        <div style="background: #e9ecef; height: 8px; border-radius: 4px;">
+                            <div style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); height: 100%; width: 85%; border-radius: 4px; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 2rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Hope & Future Outlook</span>
+                            <span style="color: var(--primary-color); font-weight: 500;">68%</span>
+                        </div>
+                        <div style="background: #e9ecef; height: 8px; border-radius: 4px;">
+                            <div style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); height: 100%; width: 68%; border-radius: 4px; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: var(--light-gray); border-radius: var(--border-radius);">
+                        <h4 style="margin-bottom: 0.5rem;">💡 Today's Healing Insight</h4>
+                        <p style="margin: 0; font-style: italic;">
+                            "Healing isn't about forgetting the past; it's about finding peace with your memories 
+                            while building hope for your future. Every conversation brings you closer to that peace."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wellbeing Check-in -->
+            <div class="fade-in" style="margin-top: 4rem;">
+                <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <h3>💭 How are you feeling today?</h3>
+                    <p>Your emotional check-ins help us provide better support</p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
+                        <button class="mood-btn" data-mood="great" style="background: #27ae60; color: white; border: none; padding: 0.75rem 1rem; border-radius: 25px; cursor: pointer; transition: var(--transition);">
+                            😊 Great
+                        </button>
+                        <button class="mood-btn" data-mood="good" style="background: #f39c12; color: white; border: none; padding: 0.75rem 1rem; border-radius: 25px; cursor: pointer; transition: var(--transition);">
+                            🙂 Good
+                        </button>
+                        <button class="mood-btn" data-mood="okay" style="background: #95a5a6; color: white; border: none; padding: 0.75rem 1rem; border-radius: 25px; cursor: pointer; transition: var(--transition);">
+                            😐 Okay
+                        </button>
+                        <button class="mood-btn" data-mood="struggling" style="background: #e67e22; color: white; border: none; padding: 0.75rem 1rem; border-radius: 25px; cursor: pointer; transition: var(--transition);">
+                            😔 Struggling
+                        </button>
+                        <button class="mood-btn" data-mood="difficult" style="background: #e74c3c; color: white; border: none; padding: 0.75rem 1rem; border-radius: 25px; cursor: pointer; transition: var(--transition);">
+                            😢 Difficult Day
+                        </button>
+                    </div>
+                    
+                    <div id="moodResponse" style="margin-top: 1rem; padding: 1rem; background: var(--light-gray); border-radius: var(--border-radius); display: none;">
+                        <!-- Mood response will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources & Support -->
+            <div class="fade-in" style="margin-top: 4rem;">
+                <div class="section-header">
+                    <h2>Support & Resources</h2>
+                    <p>Additional resources for your healing journey</p>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>📚 Healing Guides</h3>
+                        <p>Self-help articles and resources for grief, breakups, and emotional healing.</p>
+                        <a href="#guides" class="btn btn-secondary" style="margin-top: 1rem;">Explore Guides</a>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>👥 Community Support</h3>
+                        <p>Connect with others on similar healing journeys in a safe, supportive environment.</p>
+                        <a href="#community" class="btn btn-secondary" style="margin-top: 1rem;">Join Community</a>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏥 Professional Help</h3>
+                        <p>Find qualified therapists and counselors in your area for additional support.</p>
+                        <a href="#therapy" class="btn btn-secondary" style="margin-top: 1rem;">Find Therapist</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Support -->
+            <div class="card fade-in" style="margin-top: 3rem; border-left: 4px solid #e74c3c; background: #fff5f5;">
+                <h3 style="color: #e74c3c;">🆘 Need Immediate Support?</h3>
+                <p style="margin-bottom: 1rem;">
+                    If you're having thoughts of self-harm or experiencing a mental health crisis, 
+                    please reach out for immediate professional support:
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="tel:988" class="btn" style="background: #e74c3c; color: white;">📞 Call 988 (Crisis Lifeline)</a>
+                    <a href="sms:741741" class="btn" style="background: #3498db; color: white;">💬 Text HOME to 741741</a>
+                    <a href="#emergency" class="btn" style="background: #27ae60; color: white;">🚨 Emergency Services</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Voice Beyond 💜</h4>
+                    <p>Where memories find a voice again. A compassionate platform for emotional healing through AI companionship.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="create.html">Create Character</a></li>
+                        <li><a href="chat.html">Start Chatting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#crisis">Crisis Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="#twitter">Twitter</a></li>
+                        <li><a href="#facebook">Facebook</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#community">Community Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Voice Beyond. Made with heart 💜 by Pattiee & Team. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.8;">
+                    Remember: You are not alone. Healing takes time, and every step forward matters.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Dashboard-specific functionality -->
+    <script>
+        // Load dashboard data
+        function loadDashboardData() {
+            // Load characters and update stats
+            const characters = JSON.parse(localStorage.getItem('voiceBeyondCharacters')) || [];
+            const currentUserId = JSON.parse(localStorage.getItem('voiceBeyondUser'))?.id || 'guest';
+            const userCharacters = characters.filter(char => char.userId === currentUserId);
+            
+            // Update character count
+            document.getElementById('totalCharacters').textContent = userCharacters.length;
+            
+            // Calculate total conversations
+            let totalConversations = 0;
+            userCharacters.forEach(character => {
+                const chatHistory = JSON.parse(localStorage.getItem(`chat_${character.id}`)) || [];
+                totalConversations += chatHistory.filter(msg => msg.type === 'user').length;
+            });
+            document.getElementById('totalConversations').textContent = totalConversations;
+            
+            // Load recent conversations
+            loadRecentConversations(userCharacters);
+        }
+
+        // Load recent conversations
+        function loadRecentConversations(characters) {
+            const recentConversationsDiv = document.getElementById('recentConversations');
+            recentConversationsDiv.innerHTML = '';
+            
+            if (characters.length === 0) {
+                recentConversationsDiv.innerHTML = `
+                    <div class="card" style="grid-column: 1 / -1; text-align: center;">
+                        <h3>Start Your First Conversation</h3>
+                        <p>Create an AI companion to begin your healing journey.</p>
+                        <a href="create.html" class="btn btn-primary">Create Your First Companion</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let recentChats = [];
+            
+            characters.forEach(character => {
+                const chatHistory = JSON.parse(localStorage.getItem(`chat_${character.id}`)) || [];
+                if (chatHistory.length > 0) {
+                    const lastMessage = chatHistory[chatHistory.length - 1];
+                    recentChats.push({
+                        character: character,
+                        lastMessage: lastMessage,
+                        timestamp: new Date(lastMessage.timestamp)
+                    });
+                }
+            });
+            
+            // Sort by most recent
+            recentChats.sort((a, b) => b.timestamp - a.timestamp);
+            
+            if (recentChats.length === 0) {
+                recentConversationsDiv.innerHTML = `
+                    <div class="card" style="grid-column: 1 / -1; text-align: center;">
+                        <h3>No conversations yet</h3>
+                        <p>Start chatting with your AI companions to see recent conversations here.</p>
+                        <a href="chat.html" class="btn btn-primary">Start Chatting</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display recent chats (up to 3)
+            recentChats.slice(0, 3).forEach(chat => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.cursor = 'pointer';
+                
+                const timeAgo = getTimeAgo(chat.timestamp);
+                
+                card.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="chat-avatar" style="width: 40px; height: 40px; font-size: 1rem;">
+                            ${chat.character.name.charAt(0)}
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">${chat.character.name}</h4>
+                            <small style="color: var(--text-secondary);">${timeAgo}</small>
+                        </div>
+                    </div>
+                    <p style="margin: 0; font-size: 0.9rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        ${chat.lastMessage.type === 'user' ? 'You: ' : ''}${chat.lastMessage.content}
+                    </p>
+                `;
+                
+                card.addEventListener('click', () => {
+                    localStorage.setItem('selectedCharacter', chat.character.id);
+                    window.location.href = 'chat.html';
+                });
+                
+                recentConversationsDiv.appendChild(card);
+            });
+        }
+
+        // Helper function to get time ago
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 60) return 'Just now';
+            if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+            if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+            if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+            
+            return date.toLocaleDateString();
+        }
+
+        // Handle mood check-in
+        function setupMoodCheckIn() {
+            const moodButtons = document.querySelectorAll('.mood-btn');
+            const moodResponse = document.getElementById('moodResponse');
+            
+            moodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const mood = this.getAttribute('data-mood');
+                    
+                    // Remove active class from all buttons
+                    moodButtons.forEach(btn => btn.style.transform = 'scale(1)');
+                    
+                    // Highlight selected button
+                    this.style.transform = 'scale(1.1)';
+                    
+                    // Save mood
+                    const today = new Date().toDateString();
+                    localStorage.setItem(`mood_${today}`, mood);
+                    
+                    // Show response
+                    let responseText = '';
+                    let suggestions = '';
+                    
+                    switch(mood) {
+                        case 'great':
+                            responseText = "That's wonderful to hear! 🌟 It sounds like you're in a good place today.";
+                            suggestions = "Consider sharing this positive energy in a conversation with one of your companions.";
+                            break;
+                        case 'good':
+                            responseText = "I'm glad you're feeling good today! 😊 That's a positive sign of your healing progress.";
+                            suggestions = "This might be a great time to have an uplifting conversation or reflect on happy memories.";
+                            break;
+                        case 'okay':
+                            responseText = "Some days are just okay, and that's perfectly normal. 💙 You're doing fine.";
+                            suggestions = "Maybe a gentle conversation with a supportive companion could help brighten your day a little.";
+                            break;
+                        case 'struggling':
+                            responseText = "I hear you, and it's okay to have difficult days. 💜 Your feelings are valid.";
+                            suggestions = "Consider reaching out to one of your companions for some comfort and support. You don't have to go through this alone.";
+                            break;
+                        case 'difficult':
+                            responseText = "I'm sorry you're having such a hard day. 🤗 Please remember that this feeling is temporary.";
+                            suggestions = "Your companions are here to listen and support you. If you're feeling overwhelmed, consider talking to a professional counselor as well.";
+                            break;
+                    }
+                    
+                    moodResponse.innerHTML = `
+                        <h4>${responseText}</h4>
+                        <p>${suggestions}</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="chat.html" class="btn btn-primary">Talk to a Companion</a>
+                        </div>
+                    `;
+                    moodResponse.style.display = 'block';
+                });
+            });
+        }
+
+        // Add floating animation to cards
+        function addCardAnimations() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            setupMoodCheckIn();
+            
+            setTimeout(() => {
+                addCardAnimations();
+            }, 1000);
+            
+            // Auto-update dashboard every 5 minutes
+            setInterval(loadDashboardData, 300000);
+        });
+
+        // Add welcome animation
+        function addWelcomeAnimation() {
+            const welcomeSection = document.getElementById('welcomeSection');
+            const user = JSON.parse(localStorage.getItem('voiceBeyondUser'));
+            
+            if (user && welcomeSection) {
+                setTimeout(() => {
+                    const h1 = welcomeSection.querySelector('h1');
+                    h1.style.animation = 'pulse 0.6s ease-in-out';
+                }, 500);
+            }
+        }
+
+        // Check for first-time user
+        function checkFirstTimeUser() {
+            const user = JSON.parse(localStorage.getItem('voiceBeyondUser'));
+            const hasSeenDashboard = localStorage.getItem('hasSeenDashboard');
+            
+            if (user && !hasSeenDashboard) {
+                // Show welcome tour or onboarding
+                setTimeout(() => {
+                    showMessage('Welcome to your Voice Beyond dashboard! 💜 This is your safe space for healing conversations.', 'success');
+                    localStorage.setItem('hasSeenDashboard', 'true');
+                }, 2000);
+            }
+        }
+
+        // Initialize additional features
+        setTimeout(() => {
+            addWelcomeAnimation();
+            checkFirstTimeUser();
+        }, 500);
+    </script>
+</body>
+</html>
